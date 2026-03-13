@@ -1,21 +1,18 @@
 ﻿namespace TLK.Logic
 
 module Domain =
-    // 1. Define the exact parameters a Turn Cycle requires
     type TurnParameters = {
         Diameter: float
         EndZ: float
         Tool: string
     }
 
-    // 2. Define the absolute rules for what can exist on our timeline
     type Operation =
         | InitializeMachine of modelName: string
         | TurnOD of TurnParameters
         | SyncWait of syncCode: int
         | Unknown of rawData: string
 
-    // 3. Define the physical state of the machine at any given millisecond
     type MachineState = {
         CurrentX: float
         CurrentZ: float
@@ -23,20 +20,17 @@ module Domain =
     }
 
 module StateMachine =
-    // Define the exact, immutable states a channel can be in
     type ChannelState =
         | Idle
         | Machining of ToolNumber: int * Operation: string
         | WaitingForSync of SyncCode: string
         | ToolChange of TargetTool: int
 
-    // Define the physical channels of the machine
     type MachineChannel =
-        | Path1 // Main Spindle
-        | Path2 // Sub Spindle
-        | Path3 // Optional Gang/3rd Path
+        | Path1 
+        | Path2 
+        | Path3 
 
-    // The Master Context: A snapshot of the machine at any given millisecond
     type MachineContext = {
         Channel1State: ChannelState
         Channel2State: ChannelState
@@ -45,12 +39,33 @@ module StateMachine =
         IsClamped: bool
     }
 
-    // A foundational function to evaluate if a sync is safe to execute
     let evaluateSync (context: MachineContext) (requiredSync: string) =
         match context.Channel1State, context.Channel2State with
         | WaitingForSync s1, WaitingForSync s2 when s1 = requiredSync && s2 = requiredSync ->
-            // Both channels are ready and waiting for the exact same sync code
             Ok "Sync Confirmed: Safe to proceed."
         | _ ->
-            // One of the channels is busy or waiting for a different code
             Error "Sync Fault: Channels are not aligned!"
+
+    // The Execution Engine: Processes one operation and updates the machine's state
+    let ProcessOperation (context: MachineContext) (op: Domain.Operation) =
+        match op with
+        | Domain.Operation.InitializeMachine model ->
+            printfn "[F# Engine] Booting Kinematics for %s..." model
+            context 
+
+        | Domain.Operation.TurnOD p ->
+            printfn "[F# Engine] Path 1 Active: Turning to Z%f" p.EndZ
+            { context with Channel1State = Machining(0, "Turn") } 
+
+        | Domain.Operation.SyncWait code ->
+            printfn "[F# Engine] Path 1 HALTED: Requesting Sync !%d" code
+            
+            let waitingContext = { context with Channel1State = WaitingForSync(code.ToString()) }
+            
+            match evaluateSync waitingContext (code.ToString()) with
+            | Ok msg -> printfn "   -> %s" msg
+            | Error msg -> printfn "   -> %s (Channel 2 is not at this sync point!)" msg
+            
+            waitingContext
+
+        | _ -> context

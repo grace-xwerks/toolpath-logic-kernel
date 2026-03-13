@@ -104,7 +104,21 @@ namespace TLK.Core
                 }
             }
             
-            Console.WriteLine("\n--- Awaiting F# Kinematic Processing ---");
+            Console.WriteLine("\n--- F# Kinematic Processing ---");
+            
+            // 1. Create a blank starting state for the machine (both channels Idle)
+            var initialState = new StateMachine.MachineContext(
+                StateMachine.ChannelState.Idle,
+                StateMachine.ChannelState.Idle,
+                0, 0, false
+            );
+
+            // 2. Feed the operations into the F# brain one by one
+            var currentState = initialState;
+            foreach (var node in nodeDictionary.Values)
+            {
+                currentState = StateMachine.ProcessOperation(currentState, node);
+            }
         }
     }
 }

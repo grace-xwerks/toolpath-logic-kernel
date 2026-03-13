@@ -9,9 +9,9 @@
 
 ## Milestone 2: The F# State Machine (The Brain)
 - [x] Pass the C# sequential timeline into the F# class library.
-- [ ] Build the Channel 1 vs. Channel 2 validation loop.
-- [ ] Implement the "Wait/Sync" halt logic (ensuring Path 1 waits for Path 2).
-- [ ] Return a validated, crash-free timeline back to C#.
+- [x] Build the Channel 1 vs. Channel 2 validation loop.
+- [x] Implement the "Wait/Sync" halt logic (ensuring Path 1 waits for Path 2).
+- [x] Return a validated, crash-free timeline back to C#.
 
 ## Milestone 3: The G-Code Post (The Output)
 - [ ] Map the validated nodes to specific string formats (e.g., `TurnCycleNode` -> `G1 Z-0.500`).

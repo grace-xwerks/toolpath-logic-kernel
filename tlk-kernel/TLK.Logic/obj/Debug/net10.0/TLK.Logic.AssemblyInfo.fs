@@ -10,7 +10,7 @@ open System.Reflection
 [<assembly: System.Reflection.AssemblyCompanyAttribute("TLK.Logic")>]
 [<assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")>]
 [<assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")>]
-[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d046f84445f96bf624f763d82947e6846ac61856")>]
+[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5cce0b96240ff88fccba1483d08e5d63739bd81c")>]
 [<assembly: System.Reflection.AssemblyProductAttribute("TLK.Logic")>]
 [<assembly: System.Reflection.AssemblyTitleAttribute("TLK.Logic")>]
 [<assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")>]
