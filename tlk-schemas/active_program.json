@@ -1,0 +1,152 @@
+{
+    "graph": {
+        "layout_direction": 0,
+        "acyclic": true,
+        "pipe_collision": false,
+        "pipe_slicing": true,
+        "pipe_style": 1,
+        "accept_connection_types": "{}",
+        "reject_connection_types": "{}"
+    },
+    "nodes": {
+        "0x2edd635f230": {
+            "type_": "tlk.nodes.MachineNode",
+            "icon": null,
+            "name": "Machine Config",
+            "color": [
+                13,
+                18,
+                23,
+                255
+            ],
+            "border_color": [
+                74,
+                84,
+                85,
+                255
+            ],
+            "text_color": [
+                255,
+                255,
+                255,
+                180
+            ],
+            "disabled": false,
+            "selected": false,
+            "visible": true,
+            "width": 358.0625,
+            "height": 124.60000000000001,
+            "pos": [
+                -200.0,
+                50.0
+            ],
+            "layout_direction": 0,
+            "port_deletion_allowed": false,
+            "subgraph_session": {},
+            "custom": {
+                "machine_model": "Citizen_L20",
+                "is_swiss": true
+            }
+        },
+        "0x2edd6223ed0": {
+            "type_": "tlk.nodes.TurnCycleNode",
+            "icon": null,
+            "name": "OD Turn Cycle",
+            "color": [
+                13,
+                18,
+                23,
+                255
+            ],
+            "border_color": [
+                74,
+                84,
+                85,
+                255
+            ],
+            "text_color": [
+                255,
+                255,
+                255,
+                180
+            ],
+            "disabled": false,
+            "selected": false,
+            "visible": true,
+            "width": 292.28125,
+            "height": 170.8,
+            "pos": [
+                200.0,
+                -50.0
+            ],
+            "layout_direction": 0,
+            "port_deletion_allowed": false,
+            "subgraph_session": {},
+            "custom": {
+                "target_dia": "0.250",
+                "end_z": "-0.500",
+                "tool_call": "T0101"
+            }
+        },
+        "0x2edd6424050": {
+            "type_": "tlk.nodes.SyncNode",
+            "icon": null,
+            "name": "Wait / Sync",
+            "color": [
+                13,
+                18,
+                23,
+                255
+            ],
+            "border_color": [
+                74,
+                84,
+                85,
+                255
+            ],
+            "text_color": [
+                255,
+                255,
+                255,
+                180
+            ],
+            "disabled": false,
+            "selected": false,
+            "visible": true,
+            "width": 287.25,
+            "height": 78.4,
+            "pos": [
+                500.0,
+                50.0
+            ],
+            "layout_direction": 0,
+            "port_deletion_allowed": false,
+            "subgraph_session": {},
+            "custom": {
+                "sync_number": "1"
+            }
+        }
+    },
+    "connections": [
+        {
+            "out": [
+                "0x2edd635f230",
+                "Channel 1 State"
+            ],
+            "in": [
+                "0x2edd6223ed0",
+                "State In"
+            ]
+        },
+        {
+            "out": [
+                "0x2edd6223ed0",
+                "State Out"
+            ],
+            "in": [
+                "0x2edd6424050",
+                "Ch 1 In"
+            ]
+        }
+    ]
+}

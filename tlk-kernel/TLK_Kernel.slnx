@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="TLK.Core/TLK.Core.csproj" />
+  <Project Path="TLK.Logic/TLK.Logic.fsproj" />
+</Solution>

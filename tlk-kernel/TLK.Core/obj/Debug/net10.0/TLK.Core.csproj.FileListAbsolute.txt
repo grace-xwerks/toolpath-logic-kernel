@@ -1,0 +1,14 @@
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\bin\Debug\net10.0\TLK.Core.exe
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\bin\Debug\net10.0\TLK.Core.deps.json
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\bin\Debug\net10.0\TLK.Core.runtimeconfig.json
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\bin\Debug\net10.0\TLK.Core.dll
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\bin\Debug\net10.0\TLK.Core.pdb
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\obj\Debug\net10.0\TLK.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\obj\Debug\net10.0\TLK.Core.AssemblyInfoInputs.cache
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\obj\Debug\net10.0\TLK.Core.AssemblyInfo.cs
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\obj\Debug\net10.0\TLK.Core.csproj.CoreCompileInputs.cache
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\obj\Debug\net10.0\TLK.Core.dll
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\obj\Debug\net10.0\refint\TLK.Core.dll
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\obj\Debug\net10.0\TLK.Core.pdb
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\obj\Debug\net10.0\TLK.Core.genruntimeconfig.cache
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Core\obj\Debug\net10.0\ref\TLK.Core.dll

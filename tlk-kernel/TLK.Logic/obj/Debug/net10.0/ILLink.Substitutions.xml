@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<linker>
+  <assembly fullname="TLK.Logic">
+    <resource name="FSharpSignatureData.TLK.Logic" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedData.TLK.Logic" action="remove"></resource>
+    <resource name="FSharpSignatureDataB.TLK.Logic" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedDataB.TLK.Logic" action="remove"></resource>
+    <resource name="FSharpOptimizationData.TLK.Logic" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedData.TLK.Logic" action="remove"></resource>
+    <resource name="FSharpOptimizationDataB.TLK.Logic" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedDataB.TLK.Logic" action="remove"></resource>
+    <resource name="FSharpOptimizationInfo.TLK.Logic" action="remove"></resource>
+    <resource name="FSharpSignatureInfo.TLK.Logic" action="remove"></resource>
+  </assembly>
+</linker>
