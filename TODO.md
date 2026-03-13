@@ -8,7 +8,7 @@
 - [x] Parse the `"connections"` array in C# to trace the wires and build the sequential timeline.
 
 ## Milestone 2: The F# State Machine (The Brain)
-- [ ] Pass the C# sequential timeline into the F# class library.
+- [x] Pass the C# sequential timeline into the F# class library.
 - [ ] Build the Channel 1 vs. Channel 2 validation loop.
 - [ ] Implement the "Wait/Sync" halt logic (ensuring Path 1 waits for Path 2).
 - [ ] Return a validated, crash-free timeline back to C#.

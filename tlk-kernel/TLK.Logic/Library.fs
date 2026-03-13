@@ -1,7 +1,28 @@
 ﻿namespace TLK.Logic
 
-module StateMachine =
+module Domain =
+    // 1. Define the exact parameters a Turn Cycle requires
+    type TurnParameters = {
+        Diameter: float
+        EndZ: float
+        Tool: string
+    }
 
+    // 2. Define the absolute rules for what can exist on our timeline
+    type Operation =
+        | InitializeMachine of modelName: string
+        | TurnOD of TurnParameters
+        | SyncWait of syncCode: int
+        | Unknown of rawData: string
+
+    // 3. Define the physical state of the machine at any given millisecond
+    type MachineState = {
+        CurrentX: float
+        CurrentZ: float
+        ActiveTool: string
+    }
+
+module StateMachine =
     // Define the exact, immutable states a channel can be in
     type ChannelState =
         | Idle

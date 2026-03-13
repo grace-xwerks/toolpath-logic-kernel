@@ -1,0 +1,14 @@
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\bin\Debug\net10.0\TLK.Logic.deps.json
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\bin\Debug\net10.0\TLK.Logic.dll
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\bin\Debug\net10.0\TLK.Logic.pdb
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\bin\Debug\net10.0\TLK.Logic.xml
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\obj\Debug\net10.0\TLK.Logic.fsproj.AssemblyReference.cache
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\obj\Debug\net10.0\TLK.Logic.AssemblyInfoInputs.cache
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\obj\Debug\net10.0\TLK.Logic.AssemblyInfo.fs
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\obj\Debug\net10.0\TLK.Logic.fsproj.CoreCompileInputs.cache
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\obj\Debug\net10.0\TLK.Logic.sourcelink.json
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\obj\Debug\net10.0\TLK.Logic.dll
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\obj\Debug\net10.0\refint\TLK.Logic.dll
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\obj\Debug\net10.0\TLK.Logic.xml
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\obj\Debug\net10.0\TLK.Logic.pdb
+C:\projects\toolpath-logic-kernel\tlk-kernel\TLK.Logic\obj\Debug\net10.0\ref\TLK.Logic.dll

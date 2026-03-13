@@ -1,4 +1,6 @@
-﻿using System;
+﻿using TLK.Logic;
+
+using System;
 using System.IO;
 using System.Text.Json;
 
@@ -27,41 +29,49 @@ namespace TLK.Core
             Console.WriteLine($"SUCCESS: Loaded {jsonPath}\n");
             Console.WriteLine("--- Digesting Nodes ---");
 
-            // 3. Dig into the "nodes" dictionary and map their IDs
-            Dictionary<string, string> nodeDictionary = new Dictionary<string, string>();
+            // 3. Dig into the "nodes" dictionary and map to strict F# Types
+            Console.WriteLine("--- Digesting Nodes into F# Types ---");
+            
+            // Look closely: The dictionary now holds F# Operations, not strings!
+            Dictionary<string, Domain.Operation> nodeDictionary = new Dictionary<string, Domain.Operation>();
 
             if (root.TryGetProperty("nodes", out JsonElement nodesElement))
             {
                 foreach (JsonProperty node in nodesElement.EnumerateObject())
                 {
-                    string nodeId = node.Name; // Grabs the "0x..." ID
+                    string nodeId = node.Name; 
                     JsonElement nodeData = node.Value;
                     
                     if (nodeData.TryGetProperty("type_", out JsonElement typeElement))
                     {
-                        string nodeType = typeElement.GetString() ?? "";
-                        string cleanType = nodeType.Split('.')[^1];
+                        string cleanType = (typeElement.GetString() ?? "").Split('.')[^1];
 
                         if (nodeData.TryGetProperty("custom", out JsonElement props))
                         {
                             if (cleanType == "MachineNode")
                             {
                                 string model = props.GetProperty("machine_model").GetString() ?? "Unknown";
-                                Console.WriteLine($"> Initializing Environment: {model}");
-                                nodeDictionary[nodeId] = $"Machine ({model})";
+                                nodeDictionary[nodeId] = Domain.Operation.NewInitializeMachine(model);
+                                Console.WriteLine($"> F# Type Created: InitializeMachine ({model})");
                             }
                             else if (cleanType == "TurnCycleNode")
                             {
                                 string tool = props.GetProperty("tool_call").GetString() ?? "Unknown";
-                                string endZ = props.GetProperty("end_z").GetString() ?? "0.0";
-                                Console.WriteLine($"> Found Machining Cycle: Turn OD to Z{endZ} using {tool}");
-                                nodeDictionary[nodeId] = $"Turn OD (Z{endZ})";
+                                double dia = double.Parse(props.GetProperty("target_dia").GetString() ?? "0.0");
+                                double endZ = double.Parse(props.GetProperty("end_z").GetString() ?? "0.0");
+
+                                // Create the F# TurnParameters record
+                                var turnParams = new Domain.TurnParameters(dia, endZ, tool);
+                                
+                                // Wrap it in the F# Operation union
+                                nodeDictionary[nodeId] = Domain.Operation.NewTurnOD(turnParams);
+                                Console.WriteLine($"> F# Type Created: TurnOD (Z{endZ})");
                             }
                             else if (cleanType == "SyncNode")
                             {
-                                string syncNum = props.GetProperty("sync_number").GetString() ?? "0";
-                                Console.WriteLine($"> Found Channel Sync: Wait Code {syncNum}");
-                                nodeDictionary[nodeId] = $"Wait/Sync (!{syncNum})";
+                                int syncNum = int.Parse(props.GetProperty("sync_number").GetString() ?? "0");
+                                nodeDictionary[nodeId] = Domain.Operation.NewSyncWait(syncNum);
+                                Console.WriteLine($"> F# Type Created: SyncWait (!{syncNum})");
                             }
                         }
                     }
@@ -86,8 +96,9 @@ namespace TLK.Core
                     string toPort = inPin[1].GetString() ?? "";
 
                     // Look up our friendly names using the dictionary
-                    string fromName = nodeDictionary.ContainsKey(fromId) ? nodeDictionary[fromId] : "Unknown";
-                    string toName = nodeDictionary.ContainsKey(toId) ? nodeDictionary[toId] : "Unknown";
+                    // Look up our friendly names using the dictionary
+                    string fromName = nodeDictionary.ContainsKey(fromId) ? nodeDictionary[fromId].ToString() : "Unknown";
+                    string toName = nodeDictionary.ContainsKey(toId) ? nodeDictionary[toId].ToString() : "Unknown";
 
                     Console.WriteLine($"[Wire] {fromName} ({fromPort})  --->  {toName} ({toPort})");
                 }
