@@ -14,8 +14,8 @@
 - [x] Return a validated, crash-free timeline back to C#.
 
 ## Milestone 3: The G-Code Post (The Output)
-- [ ] Map the validated nodes to specific string formats (e.g., `TurnCycleNode` -> `G1 Z-0.500`).
-- [ ] Output a basic, two-channel text file formatted for the Citizen L20.
+- [x] Map the validated nodes to specific string formats (e.g., `TurnCycleNode` -> `G1 Z-0.500`).
+- [x] Output a basic, two-channel text file formatted for the Citizen L20.
 - [ ] Run a test compile to visually verify the `!1L1` sync codes line up perfectly.
 
 ## Milestone 4: The AI Bridge (The End Goal)

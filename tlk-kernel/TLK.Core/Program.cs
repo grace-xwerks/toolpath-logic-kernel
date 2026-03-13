@@ -119,6 +119,8 @@ namespace TLK.Core
             {
                 currentState = StateMachine.ProcessOperation(currentState, node);
             }
+            // 5. Hand the validated timeline over to the G-Code Compiler
+            PostProcessor.GenerateCitizenGCode(nodeDictionary.Values);
         }
     }
 }
