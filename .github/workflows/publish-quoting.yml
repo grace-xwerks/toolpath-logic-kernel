@@ -1,0 +1,75 @@
+name: Publish TLK.Quoting
+
+on:
+  push:
+    tags:
+      - 'quoting-v*'
+
+  # Allow re-running manually against a specific ref. Manual runs publish
+  # whatever version is in the csproj — they do not derive from a tag.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Resolve package version
+        id: version
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          if [[ "$EVENT_NAME" == "push" ]]; then
+            # Tag form: refs/tags/quoting-v1.2.3 -> 1.2.3
+            VERSION="${REF_NAME#quoting-v}"
+            echo "Using version $VERSION from tag $REF_NAME"
+          else
+            # Manual run: defer to whatever <Version> is set in the csproj.
+            VERSION=""
+            echo "Manual run — version comes from csproj"
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Pack
+        working-directory: tlk-kernel/TLK.Quoting
+        env:
+          PKG_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if [[ -n "$PKG_VERSION" ]]; then
+            dotnet pack -c Release -o ../../artifacts -p:Version="$PKG_VERSION"
+          else
+            dotnet pack -c Release -o ../../artifacts
+          fi
+
+      - name: Push to GitHub Packages
+        working-directory: artifacts
+        env:
+          # GITHUB_TOKEN is auto-issued by Actions with packages:write on
+          # the repo's owner — for grace-xwerks/toolpath-logic-kernel that
+          # publishes to nuget.pkg.github.com/grace-xwerks.
+          NUGET_API_KEY: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # --skip-duplicate so re-runs on the same tag are idempotent.
+          dotnet nuget push '*.nupkg' \
+            --source "https://nuget.pkg.github.com/grace-xwerks/index.json" \
+            --api-key "$NUGET_API_KEY" \
+            --skip-duplicate
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: TLK.Quoting-${{ steps.version.outputs.version || 'manual' }}
+          path: artifacts/*.*nupkg
+          if-no-files-found: error
